@@ -1,0 +1,9 @@
+[submodule "thirdparty/gflags"]
+	path = thirdparty/gflags
+	url = git@gitlab.gz.cvte.cn:1602/gflags.git
+[submodule "thirdparty/openh264"]
+	path = thirdparty/openh264
+	url = git@gitlab.gz.cvte.cn:1602/openh264.git
+[submodule "thirdparty/Opus"]
+	path = thirdparty/Opus
+	url = git@gitlab.gz.cvte.cn:1602/Opus.git

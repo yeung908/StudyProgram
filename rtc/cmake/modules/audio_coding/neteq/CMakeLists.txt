@@ -1,0 +1,84 @@
+INCLUDE_DIRECTORIES(${webrtc_SOURCE_DIR}/src)
+
+ADD_DEFINITIONS(-DWEBRTC_CODEC_ILBC
+				-DWEBRTC_CODEC_OPUS
+				-DWEBRTC_OPUS_SUPPORT_120MS_PTIME=0
+				-DWEBRTC_CODEC_ISAC
+				-DWEBRTC_CODEC_G722)
+
+LIST(APPEND RTC_NETEQ_SOURCES
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/accelerate.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/accelerate.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/audio_decoder_impl.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/audio_decoder_impl.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/audio_multi_vector.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/audio_multi_vector.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/audio_vector.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/audio_vector.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/background_noise.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/background_noise.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/buffer_level_filter.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/buffer_level_filter.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/comfort_noise.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/comfort_noise.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/cross_correlation.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/cross_correlation.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decision_logic.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decision_logic.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decision_logic_fax.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decision_logic_fax.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decision_logic_normal.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decision_logic_normal.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decoder_database.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/decoder_database.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/defines.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/delay_manager.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/delay_manager.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/delay_peak_detector.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/delay_peak_detector.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/dsp_helper.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/dsp_helper.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/dtmf_buffer.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/dtmf_buffer.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/dtmf_tone_generator.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/dtmf_tone_generator.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/expand.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/expand.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/include/neteq.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/merge.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/merge.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/nack_tracker.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/nack_tracker.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/neteq.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/neteq_impl.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/neteq_impl.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/normal.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/normal.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/packet.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/packet.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/packet_buffer.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/packet_buffer.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/post_decode_vad.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/post_decode_vad.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/preemptive_expand.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/preemptive_expand.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/random_vector.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/random_vector.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/red_payload_splitter.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/red_payload_splitter.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/rtcp.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/rtcp.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/statistics_calculator.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/statistics_calculator.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/sync_buffer.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/sync_buffer.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/tick_timer.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/tick_timer.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/time_stretch.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/time_stretch.h
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/timestamp_scaler.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/modules/audio_coding/neteq/timestamp_scaler.h
+)
+
+ADD_LIBRARY(rtc_neteq STATIC ${RTC_NETEQ_SOURCES})
+SET_TARGET_PROPERTIES(rtc_neteq PROPERTIES FOLDER "webrtc")

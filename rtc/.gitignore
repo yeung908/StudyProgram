@@ -1,0 +1,26 @@
+# Ignore build directory
+build/
+.vscode/
+Debug/
+Release/
+CMakeFiles/
+android_toolchain/
+libs/
+obj/
+cmake-build-debug/
+
+cmake_install.cmake
+CMakeCache.txt
+*.obj
+*.sln
+*.suo
+*.tlog
+*.VC.opendb
+*.VC.db
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+/thirdparty/libvpx/source/config/linux/arm-neon/vpx_config.S
+/src/webrtc/logging/rtc_event_log/rtc_event_log.pb.cc
+/src/webrtc/logging/rtc_event_log/rtc_event_log.pb.h

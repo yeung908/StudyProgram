@@ -1,0 +1,44 @@
+LIST(APPEND  SILK_HEADERS 
+	${Opus_SOURCE_DIR}/silk/debug.h  
+	${Opus_SOURCE_DIR}/silk/control.h  
+	${Opus_SOURCE_DIR}/silk/errors.h  
+	${Opus_SOURCE_DIR}/silk/API.h  
+	${Opus_SOURCE_DIR}/silk/typedef.h  
+	${Opus_SOURCE_DIR}/silk/define.h  
+	${Opus_SOURCE_DIR}/silk/main.h  
+	${Opus_SOURCE_DIR}/silk/x86/main_sse.h  
+	${Opus_SOURCE_DIR}/silk/PLC.h  
+	${Opus_SOURCE_DIR}/silk/structs.h  
+	${Opus_SOURCE_DIR}/silk/tables.h  
+	${Opus_SOURCE_DIR}/silk/tuning_parameters.h  
+	${Opus_SOURCE_DIR}/silk/Inlines.h  
+	${Opus_SOURCE_DIR}/silk/MacroCount.h  
+	${Opus_SOURCE_DIR}/silk/MacroDebug.h  
+	${Opus_SOURCE_DIR}/silk/macros.h  
+	${Opus_SOURCE_DIR}/silk/NSQ.h  
+	${Opus_SOURCE_DIR}/silk/pitch_est_defines.h  
+	${Opus_SOURCE_DIR}/silk/resampler_private.h  
+	${Opus_SOURCE_DIR}/silk/resampler_rom.h  
+	${Opus_SOURCE_DIR}/silk/resampler_structs.h  
+	${Opus_SOURCE_DIR}/silk/SigProc_FIX.h  
+	${Opus_SOURCE_DIR}/silk/x86/SigProc_FIX_sse.h  
+	${Opus_SOURCE_DIR}/silk/arm/macros_armv4.h  
+	${Opus_SOURCE_DIR}/silk/arm/macros_armv5e.h  
+	${Opus_SOURCE_DIR}/silk/arm/macros_arm64.h  
+	${Opus_SOURCE_DIR}/silk/arm/SigProc_FIX_armv4.h  
+	${Opus_SOURCE_DIR}/silk/arm/SigProc_FIX_armv5e.h  
+	${Opus_SOURCE_DIR}/silk/arm/NSQ_neon.h  
+	${Opus_SOURCE_DIR}/silk/fixed/main_FIX.h  
+	${Opus_SOURCE_DIR}/silk/fixed/structs_FIX.h  
+	${Opus_SOURCE_DIR}/silk/fixed/mips/noise_shape_analysis_FIX_mipsr1.h  
+	${Opus_SOURCE_DIR}/silk/fixed/mips/prefilter_FIX_mipsr1.h  
+	${Opus_SOURCE_DIR}/silk/fixed/mips/warped_autocorrelation_FIX_mipsr1.h  
+	${Opus_SOURCE_DIR}/silk/float/main_FLP.h  
+	${Opus_SOURCE_DIR}/silk/float/structs_FLP.h  
+	${Opus_SOURCE_DIR}/silk/float/SigProc_FLP.h  
+	${Opus_SOURCE_DIR}/silk/mips/macros_mipsr1.h  
+	${Opus_SOURCE_DIR}/silk/mips/NSQ_del_dec_mipsr1.h  
+	${Opus_SOURCE_DIR}/silk/mips/sigproc_fix_mipsr1.h
+)
+
+SOURCE_GROUP(Headers FILES ${SILK_HEADERS})

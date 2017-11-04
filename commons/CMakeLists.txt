@@ -1,0 +1,21 @@
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/inc
+					${CMAKE_CURRENT_SOURCE_DIR}/src
+					)
+					
+LIST(APPEND COMMONS_SOURCES
+			${CMAKE_CURRENT_SOURCE_DIR}/inc/status.h
+			${CMAKE_CURRENT_SOURCE_DIR}/inc/variable_defines.h
+			${CMAKE_CURRENT_SOURCE_DIR}/inc/logger_handler.h
+			${CMAKE_CURRENT_SOURCE_DIR}/inc/scoped_named_mutex.h
+			${CMAKE_CURRENT_SOURCE_DIR}/inc/error.h
+			${CMAKE_CURRENT_SOURCE_DIR}/src/error.cxx
+			${CMAKE_CURRENT_SOURCE_DIR}/inc/structure.h
+			${CMAKE_CURRENT_SOURCE_DIR}/src/structure.cxx)
+					 
+FILE(GLOB INCS "inc/*.h")
+FILE(GLOB HEADERS "src/*.h")
+SOURCE_GROUP("Headers Files" FILES ${INCS} ${HEADERS})
+
+ADD_LIBRARY(commons STATIC ${COMMONS_SOURCES} ${HEADERS} ${INCS})
+
+SET_TARGET_PROPERTIES(commons PROPERTIES FOLDER "common")

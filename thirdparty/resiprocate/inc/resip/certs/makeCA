@@ -1,0 +1,125 @@
+#!/bin/sh
+#set -x
+
+rm -rf demoCA
+
+mkdir demoCA 
+mkdir demoCA/certs 
+mkdir demoCA/crl 
+mkdir demoCA/newcerts
+mkdir demoCA/private
+echo "01" > demoCA/serial
+hexdump -n 4 -e '4/1 "%04u"' /dev/random > demoCA/serial
+touch demoCA/index.txt
+	    
+# You may need to modify this for where your default file is
+# you can find where yours in by typing "openssl ca"
+for D in $OPENSSLDIR /etc/ssl /usr/local/ssl /sw/etc/ssl /sw/share/ssl /System/Library/OpenSSL /opt/local/etc/openssl; do
+	CONF=$D/openssl.cnf
+	[ -f ${CONF} ] && break
+done
+
+if [ ! -f $CONF  ]; then
+    echo "Can not find file $CONF - set your OPENSSLDIR variable"
+    exit 
+fi 
+cp $CONF openssl.cnf
+
+cat >> openssl.cnf  <<EOF
+[ cj_cert ]
+subjectAltName=\${ENV::ALTNAME}
+basicConstraints=CA:FALSE
+subjectKeyIdentifier=hash
+#authorityKeyIdentifier=keyid,issuer:always
+
+[ cj_req ]
+basicConstraints = CA:FALSE
+subjectAltName=\${ENV::ALTNAME}
+subjectKeyIdentifier=hash
+#authorityKeyIdentifier=keyid,issuer:always
+#keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+
+EOF
+
+cat > demoCA/private/cakey.pem <<EOF
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+MIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIlTXw5DSf1bICAggA
+MBQGCCqGSIb3DQMHBAjbfMU7LoW4gQSCBMg8fVGDGf+GWuPFd0WCX4sQTYa7xr/G
+ZV4s2CPj6KiEYHq36zz3TvkXN67migzz/aVU8yEMlyRG/P8OS8pM94RLJgKBW0hg
+LS6fMjMlzkxVumEasjsor5waJZuwvb7waTBV253XxHHEGZdINedXlkA84iEfYFll
+RUyYFAjXZqx8zChSUhr5wmi4Hx5oA5E1lOFTSskqn1Sp8yzBp0qBqEZ1lOgc4Kb7
+5M+x8IOVwtYr+ga2C4MqHiLqB+4guVWqpN9xG7UkV6XxqXJF/yHiG3xv4nI+O3fL
+PO65i5T/880SHPte3lqFqBm2JoblGREw8Pmv7QPIViQMG7M6eHla6Jlz8HrsGLQ4
+X5f4UnretzGu6/TBTrWqhyU4cpFl3ZSDfWeEHLYeVB2L5mtsaJwAlnKSWmwKWKgI
+xLYBjiW9EhszV+tzwhSRU4htjb2OB46O6bCQJ36fkjV9kfF7hZMNhPLyN3a9ZxIU
+oZNuA7csPJ+irsgsOvw3KufPbjd+86aNnu8cwoCTM/yXHw6LhdYsvU+FuT1BBmOZ
+BcZkDKRmxXHwvPmObXDmzNh58G+SorZ753b2wHY9Vw6pxppmqhlWQqLVHXWtaCGz
+EcnHhBA80Dnzsx+50vYEpK2uLgK7xpXNIrZDPabAaG4LvE3oDBdhLdhCcV3wy4Of
+U84k2voxjL8sf1y7+AdU36W5S1FDEQMBsLqtuDxruK3BS8UDgrBt6H3CuyJmfMkF
+dyBb5K71VKROFLg8ktZh00JB/bXYZm/yi1ENLXkcHxTcC11aLsqqE9q8roeimEz8
+6+ZWDcFbNbsfFyI+Qi9R4FRvgUmxdX/U4UH3lcQbjNBOOPfVm/HVPNvRpPaAbOqu
+KrSkzRcq5ICF0bLA/C13K9AQemTPzyjW+0Dze2es9UZt931AOdD+Pns1Kwe3oBgP
+u2mEAB0SVvmBq3KeXiWBjk+TCHm6sd1lV3v4Ro1HklrlWAeLzicOUxTVyTUjDbLg
+JO9uTFqJCVB6McIlThxBF0dlFzDrw0TeA30dqwDzmwuNbORQA8iIs2bSyqv1VE8N
+WKipdVIrtNjFaa+lVySlKUSftxtW7ogFTxQBVa27rHHc0aTZvz5/5cphw/LXyrjS
+PSegDXar7KenED/bDHFWcartfsFD9rWLYLAtaI+MPeAK0qrU18ccgij6WFKasCCa
+cSyA/ef9E1d5Xy5JQf6KECf6tigDIX6u1tRhFhmK9lY5bcKICealQTxwnBHqN+Nq
+iuo3CcLCVoVROkvLgsKMh97Q+8HUfp+txcj4SwCpr+acc+81PWqOcmDwW2XXsybs
+ZdQtjJiOmVHxVkqsmcksXH/TBsKJ2JVagQ/lLfkaAljWYfaT0HsE+9PTKn4zgQZR
+Jm+tW5CdMjMGwsubP3A71Z13iCUvTQFJxaxsnPOZMOA6b4kqNu6fvG01wZfqtify
+nCHGrfp8SOQX/VG9zDHcziXAzXZ9KFZqud71ewA5MEglFY47iB45hw1wzMg9gAlW
+39qvb+gULVg1/wzn0MNjDYkcirjNSEbFYRWnv2Y8C0Nl5W+DhL+BEy/4QS/Hi3Bx
+dCguxvor7dLogiXLQveTIN4aiaaJJhT6dYo18TONkhFaFvoFoYuclRe7TilvQ6ap
+too=
+-----END ENCRYPTED PRIVATE KEY-----
+EOF
+
+cat > demoCA/cacert.pem <<EOF
+-----BEGIN CERTIFICATE-----
+MIID8TCCAtmgAwIBAgIJAOuARzV9xaAQMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYD
+VQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTERMA8GA1UEBwwIU2FuIEpvc2Ux
+DjAMBgNVBAoMBXNpcGl0MSkwJwYDVQQLDCBTaXBpdCBUZXN0IENlcnRpZmljYXRl
+IEF1dGhvcml0eTEKMAgGA1UEAwwBIDEQMA4GCSqGSIb3DQEJARYBIDAeFw0xMzAy
+MjEyMDIzNTJaFw0yMzAyMTkyMDIzNTJaMIGOMQswCQYDVQQGEwJVUzETMBEGA1UE
+CAwKQ2FsaWZvcm5pYTERMA8GA1UEBwwIU2FuIEpvc2UxDjAMBgNVBAoMBXNpcGl0
+MSkwJwYDVQQLDCBTaXBpdCBUZXN0IENlcnRpZmljYXRlIEF1dGhvcml0eTEKMAgG
+A1UEAwwBIDEQMA4GCSqGSIb3DQEJARYBIDCCASIwDQYJKoZIhvcNAQEBBQADggEP
+ADCCAQoCggEBAMEz80zTY13l3vJdg9AG0i+Y+YITJA9XkebD3CmjrvtrY2S0/OP0
+6KDcG9q7VI9lrR3p6blxvm1GevJVnhNbYp2WFgiN3dwRjbCgdBq6328a5IEAmg/1
+wywDOImL4XhwWSgKpeCanh/UvoKoRt6hj4atugEN+u91eEQqAWXFArGu8NmyBM85
+SvzBYq2FrZqvcTIFGfs9qMyzDjpJXr5c6wISW/OMBBUdKjda5unELU6xwt0qtiRP
+hmJdxYX+2BSL6G651FlRY1wWeHEqGngpWybBvrBnvj3sDM4IWmMWjHJg3MsCwJuc
+670wreraBIK4UVjndfHWhJauRkOAfE+KNGECAwEAAaNQME4wHQYDVR0OBBYEFFLI
+3MNbyVWBJ0do3TrJzoQZb0wFMB8GA1UdIwQYMBaAFFLI3MNbyVWBJ0do3TrJzoQZ
+b0wFMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBACMlfDQTUH3Wjf8e
+Su3zXZGKpdFlXVqi+ZTSXwfd3u162WmTCykto0mmCjBwpD/eSH49Vgr7UspSNJpb
+rsMMPmiTNQcJAXOcE30oHvkvgGg0OTuL2ea3XyXhtp6jKfZDep5hNmeEeRYKBghx
+jSgkTWbgGAyYQtK2VzmYvqwgBf7XeOk6Pgd+W11ykpKFlhuDXq8ktQAna6DBEWiY
+qAz5EbI+hWBrweqNWZTorSMl2isc97tKXgHrB2Ctc/1vrkDS84NJ//FmbHQPZyUq
+ovMUMUNBGeIO5IS6pcot2g/msystP/R7wbURiOr697OF10H9jKbHgEnsmo4FOxzh
+4z6bG6w=
+-----END CERTIFICATE-----
+EOF
+
+
+# uncomment the following lines to generate your own key pair 
+# 
+#openssl req -newkey rsa:2048 -passin pass:password \
+#     -passout pass:password \
+#     -sha256 -x509 -keyout demoCA/private/cakey.pem \
+#     -out demoCA/cacert.pem -days 3650 <<EOF
+#US
+#California
+#San Jose
+#sipit
+#Sipit Test Certificate Authority
+# 
+# 
+#EOF
+# 
+#openssl crl2pkcs7 -nocrl -certfile demoCA/cacert.pem \
+#         -outform DER -out demoCA/cacert.p7c
+# 
+cp demoCA/cacert.pem root_cert_fluffyCA.pem
+
+

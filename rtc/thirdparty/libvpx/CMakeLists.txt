@@ -1,0 +1,61 @@
+PROJECT(vpx)
+
+IF(ANDROID)
+	SET(CAN_USE_ASSEMBLER TRUE)
+	ENABLE_LANGUAGE(ASM)
+ELSE()
+	SET(CMAKE_ASM_COMPILE_OBJECT yasm)
+ENDIF(ANDROID)
+
+SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
+
+INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/libvpx
+					${vpx_SOURCE_DIR}/source/config)
+IF(WIN32)
+	IF(CMAKE_CL_64)
+		INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/win/x64)
+	ELSE(CMAKE_CL_64)
+		INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/win/ia32)
+	ENDIF(CMAKE_CL_64)
+ENDIF(WIN32)
+
+IF(APPLE)
+	IF(IOS)
+		INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/ios/arm64)
+	ELSE()
+		SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common")
+		INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/mac/x64)
+	ENDIF(IOS)
+ENDIF(APPLE)
+
+IF(CMAKE_SYSTEM_PROCESSOR STREQUAL "armv5te")
+	INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/linux/arm)
+ENDIF()
+
+IF(CMAKE_SYSTEM_PROCESSOR STREQUAL "armv7-a")
+	INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/linux/arm-neon)
+	STRING(REPLACE "-mfloat-abi=softfp -mfpu=vfpv3-d16" "" FIXED_C_FLAGS ${CMAKE_C_FLAGS})
+	STRING(REPLACE "-std=c++11" "" FIXED_C_FLAGS ${FIXED_C_FLAGS})
+	SET(CMAKE_C_FLAGS ${FIXED_C_FLAGS})
+	SET(CMAKE_C_FLAGS "-mfloat-abi=softfp -mfpu=neon -mcpu=cortex-a8 ${CMAKE_C_FLAGS}")
+	
+	SET(CMAKE_ASM_FLAGS "-mfpu=neon -march=armv7-a")
+ENDIF()
+
+IF(CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
+	SET(CMAKE_CXX_FLAGS  "-mfloat-abi=softfp ${CMAKE_CXX_FLAGS}")
+	INCLUDE_DIRECTORIES(${vpx_SOURCE_DIR}/source/config/linux/arm64)
+ENDIF()
+
+INCLUDE(cmakefiles/vp8.cmake)
+INCLUDE(cmakefiles/vp9.cmake)
+INCLUDE(cmakefiles/vpx.cmake)
+INCLUDE(cmakefiles/vpx_config.cmake)
+INCLUDE(cmakefiles/vpx_dsp.cmake)
+INCLUDE(cmakefiles/vpx_mem.cmake)
+IF(NOT APPLE)
+	INCLUDE(cmakefiles/vpx_ports.cmake)
+ENDIF()
+INCLUDE(cmakefiles/vpx_scale.cmake)
+INCLUDE(cmakefiles/vpx_util.cmake)
+

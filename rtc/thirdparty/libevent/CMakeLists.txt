@@ -1,0 +1,22 @@
+project(libevent)
+
+IF(ANDROID)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/android)
+	ADD_DEFINITIONS(-DHAVE_CONFIG_H -DANDROID -fvisibility=hidden)
+ENDIF(ANDROID)
+
+IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/linux)
+ENDIF()
+
+LIST(APPEND LIBEVENT_SOURCES
+			event.c 
+			evutil.c 
+			epoll.c 
+			log.c 
+			poll.c 
+			select.c 
+			signal.c
+)
+
+ADD_LIBRARY(libevent STATIC ${LIBEVENT_SOURCES})

@@ -1,0 +1,84 @@
+INCLUDE_DIRECTORIES(${webrtc_SOURCE_DIR}/src)
+
+LIST(APPEND RTC_P2P_SOURCES
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/asyncstuntcpsocket.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/asyncstuntcpsocket.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/basicpacketsocketfactory.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/basicpacketsocketfactory.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/candidate.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/common.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/dtlstransportchannel.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/dtlstransportchannel.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/dtlstransportinternal.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/icetransportinternal.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/jseptransport.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/jseptransport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/p2pconstants.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/p2pconstants.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/p2ptransportchannel.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/p2ptransportchannel.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/packetsocketfactory.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/packettransportinterface.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/port.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/port.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/portallocator.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/portallocator.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/portinterface.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/pseudotcp.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/pseudotcp.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/relayport.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/relayport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/session.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/session.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/sessiondescription.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/sessiondescription.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stun.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stun.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stunport.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stunport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stunrequest.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stunrequest.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/tcpport.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/tcpport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportcontroller.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportcontroller.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportdescription.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportdescription.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportdescriptionfactory.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportdescriptionfactory.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/transportinfo.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/turnport.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/turnport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/udpport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/udptransport.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/udptransport.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/client/basicportallocator.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/client/basicportallocator.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/client/socketmonitor.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/client/socketmonitor.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/relayserver.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/relayserver.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stunserver.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/stunserver.h
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/turnserver.cc
+			${webrtc_SOURCE_DIR}/src/webrtc/p2p/base/turnserver.h
+)
+
+IF(RTC_USE_QUIC)
+	LIST(APPEND RTC_P2P_SOURCES
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quicconnectionhelper.cc
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quicconnectionhelper.h
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quicsession.cc
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quicsession.h
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quictransport.cc
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quictransport.h
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quictransportchannel.cc
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/quictransportchannel.h
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/reliablequicstream.cc
+				${webrtc_SOURCE_DIR}/src/webrtc/p2p/quic/reliablequicstream.h
+	)
+ENDIF()
+
+ADD_LIBRARY(rtc_p2p STATIC ${RTC_P2P_SOURCES})
+SET_TARGET_PROPERTIES(rtc_p2p PROPERTIES FOLDER "webrtc")

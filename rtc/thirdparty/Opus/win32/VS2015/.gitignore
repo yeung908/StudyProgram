@@ -1,0 +1,8 @@
+.vs
+x64
+win32
+*.suo
+*.user
+test_bin
+*.opensdf
+*.sdf
